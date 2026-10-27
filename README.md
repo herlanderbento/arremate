@@ -24,6 +24,11 @@
   <img src="https://img.shields.io/badge/Docker-ready-2496ED?logo=docker&logoColor=white" alt="Docker" />
 </p>
 
+<p align="center">
+  <a href="https://arremate-liard.vercel.app"><strong>Aplicação</strong></a> ·
+  <a href="https://arremate-onmw.onrender.com/docs"><strong>API (Swagger)</strong></a>
+</p>
+
 ---
 
 ## Sobre o projeto
@@ -31,6 +36,15 @@
 **Arremate** é uma casa de leilões online de obras de arte, desenvolvida para o desafio técnico Elite Dev da Verzel. Leiloeiros criam lotes a partir de obras da API pública do [Art Institute of Chicago](https://api.artic.edu/docs/); licitantes depositam saldo simulado, dão lances ao vivo e recebem um comprovante de arremate partilhável. Qualquer pessoa, sem login, pode auditar o histórico de lances de um lote e verificar que ele não foi adulterado.
 
 O back-end segue **Clean Architecture** e **Domain-Driven Design (DDD)**, organizado por módulos de domínio (contas, carteira, catálogo, leilão e auditoria), com as regras de negócio em Python puro, testáveis sem banco. O front-end é uma aplicação Next.js que consome a API.
+
+### Demonstração
+
+| | Endereço |
+|---|---|
+| Aplicação (Vercel) | https://arremate-liard.vercel.app |
+| API (Render) | https://arremate-onmw.onrender.com · Swagger em [`/docs`](https://arremate-onmw.onrender.com/docs) |
+
+Os dados de teste já estão carregados: entre com `ana@arremate.dev`, `bruno@arremate.dev` (licitantes) ou `leiloeiro@arremate.dev` (leiloeiro), todos com a senha **`arremate123`** (ver [Dados de teste](#dados-de-teste)). A API está no plano gratuito do Render: o primeiro acesso depois de um tempo parado pode demorar até ~1 min.
 
 ## Estrutura do repositório
 

@@ -28,7 +28,7 @@ class GetUserUseCase(UseCase):
         user = await self.user_repository.find_by_id(input.user_id.value)
         if user is not None:
             return self.__to_output(user)
-        raise NotFoundException(f"User with id {input.user_id} not found")
+        raise NotFoundException("Usuário não encontrado.")
 
     def __to_output(self, entity: User) -> GetUserOutput:
         return GetUserOutput.from_entity(entity)
