@@ -1,0 +1,47 @@
+name: arremate-api
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: arremate_db
+    restart: unless-stopped
+    env_file:
+      - ./backend/.env
+    environment:
+      POSTGRES_USER: arremate
+      POSTGRES_DB: arremate
+    ports:
+      - "127.0.0.1:5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U arremate -d arremate"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: arremate_api
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - ./backend/src:/app/src
+      - ./backend/migrations:/app/migrations
+    env_file:
+      - ./backend/.env
+    environment:
+      ENV: development
+      POSTGRES_HOST: db
+      POSTGRES_PORT: "5432"
+      COOKIE_SECURE: "false"
+    command: sh -c "alembic upgrade head && exec uvicorn main:app --host 0.0.0.0 --port 8000 --reload --reload-dir src"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
